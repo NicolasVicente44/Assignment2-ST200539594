@@ -18,6 +18,7 @@ public class Main extends Application {
         stage.show();
 
 
+        //guitar icon/logo for the application
         Image icon = new Image(getClass().getResourceAsStream("guitarlogo.png"));
         stage.getIcons().add(icon);
     }

@@ -40,7 +40,7 @@ public class Song {
     }
 
     public void setTitle(String title) {
-        if (title == null) {
+        if (title == null || title.isEmpty()) {
             throw new IllegalArgumentException("Title cannot be empty.");
          }
 
@@ -73,7 +73,7 @@ public class Song {
 
     public void setAlbum(String album) {
 
-        if (album == null) {
+        if (album == null || album.isEmpty()) {
             throw new IllegalArgumentException("Album cannot be empty.");
         }
 
@@ -107,11 +107,11 @@ public class Song {
 
     public void setAuthor(String author) {
 
-        if (author == null) {
+        if (author == null || author.isEmpty()) {
             throw new IllegalArgumentException("Author cannot be empty.");
         }
 
-        if (author.length() < 2 || album.length() > 50) {
+        if (author.length() < 2 || author.length() > 50) {
             throw new IllegalArgumentException("Author must be between 2 and 50 characters.");
         }
 
@@ -170,7 +170,7 @@ public class Song {
 
     public void setGenre(String genre) {
 
-        if (genre == null) {
+        if (genre == null || genre.isEmpty()) {
             throw new IllegalArgumentException("Genre cannot be empty.");
         }
 
@@ -203,7 +203,7 @@ public class Song {
 
     public void setSongKey(String songKey) {
 
-        if (songKey.length() > 2) {
+        if (songKey.length() > 2 || songKey.length() < 1) {
             throw new IllegalArgumentException("Key must be 1 or 2 characters.");
         }
 

@@ -21,14 +21,15 @@ public class Riff extends Song {
     /**
      * riff class constructor, the riff class inherits from the song class as there can be several riffs for each song
      */
-    public Riff(String title, String author, String album, int releaseYear, String genre, String songKey, String riffImagePath, String difficulty, String capoPosition, int beatsPerMinute, int riffNumber) {
-        super(title, author, album, releaseYear, genre, songKey);
+    public Riff(Song song, String riffImagePath, String difficulty, String capoPosition, int beatsPerMinute, int riffNumber) {
+        super(song.getTitle(), song.getAuthor(), song.getAlbum(), song.getReleaseYear(), song.getGenre(), song.getSongKey());
+        setRiffNumber(String.valueOf(riffNumber));
         setRiffImagePath(riffImagePath);
         setDifficulty(difficulty);
         setCapoPosition(capoPosition);
         setBeatsPerMinute(beatsPerMinute);
-        setRiffNumber(String.valueOf(riffNumber));
     }
+
 
 
 
@@ -53,7 +54,7 @@ public class Riff extends Song {
 
 
         //check if the string matches the format songNameRiff#
-       if (!riffImagePath.endsWith(".png") || !riffImagePath.contains("riff") || !riffImagePath.contains(String.valueOf(riffNumber))) {
+       if (!riffImagePath.endsWith(".png") || !riffImagePath.contains("Riff") || !riffImagePath.contains(String.valueOf(riffNumber))) {
            throw new IllegalArgumentException("Image path must be in the format: songTitleRiff#");
        }
 
@@ -76,7 +77,7 @@ public class Riff extends Song {
 
     public void setDifficulty(String difficulty) {
 
-        if (difficulty == null) {
+        if (difficulty == null || difficulty.isEmpty()) {
             throw new IllegalArgumentException("Difficulty Cannot be empty.");
         }
 
@@ -109,8 +110,8 @@ public class Riff extends Song {
 
         try {
             int capo = Integer.parseInt(capoPosition);
-            if (capo < 1 || capo > 12) {
-                throw new IllegalArgumentException("Capo position must be between 1 and 12.");
+            if (capo < 0 || capo > 12) {
+                throw new IllegalArgumentException("Capo position must be between 0 and 12.");
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Capo position must be a valid integer.");
@@ -140,6 +141,13 @@ public class Riff extends Song {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Beats per minute must be a valid integer.");
         }
+
+
+        //check for neagtive value
+        if (beatsPerMinute < 0) {
+            throw new IllegalArgumentException("Beats per minute cannot be a negative value");
+        }
+
         this.beatsPerMinute = beatsPerMinute;
     }
 
