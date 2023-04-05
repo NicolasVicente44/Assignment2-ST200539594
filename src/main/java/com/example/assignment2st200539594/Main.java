@@ -2,6 +2,7 @@ package com.example.assignment2st200539594;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -11,10 +12,10 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Riff-Library.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Guitar Tab Library ");
-        stage.setScene(scene);
+        Parent root = FXMLLoader.load(getClass().getResource("Riff-Library.fxml"));
+        Scene scene1 = new Scene(root);
+        stage.setTitle("Guitar Tab Library");
+        stage.setScene(scene1);
         stage.show();
 
 

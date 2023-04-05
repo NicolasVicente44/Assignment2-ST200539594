@@ -1,16 +1,225 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.assignment2st200539594.SongTabController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment2st200539594.SongTabController">
+   <children>
+      <FlowPane prefHeight="800.0" prefWidth="1200.0">
+         <children>
+            <VBox prefHeight="800.0" prefWidth="400.0">
+               <children>
+                  <ListView fx:id="songsListView" fixedCellSize="-5.0" maxHeight="650.0" maxWidth="350.0" minWidth="0.0" prefHeight="650.0" prefWidth="350.0" translateX="25.0" translateY="100.0" />
+               </children>
+            </VBox>
+            <VBox maxHeight="400.0" maxWidth="400.0" minHeight="400.0" prefHeight="400.0" prefWidth="400.0" translateX="400.0" translateY="-200.0">
+               <children>
+                  <VBox maxHeight="400.0" maxWidth="200.0" minHeight="400.0" minWidth="200.0" prefHeight="400.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Difficulty:" translateX="20.0">
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Capo Position:" translateX="20.0">
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="BPM:" translateX="20.0">
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Riff Number:" translateX="20.0">
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox maxHeight="400.0" maxWidth="200.0" minHeight="400.0" prefHeight="400.0" prefWidth="200.0" translateX="200.0" translateY="-400.0">
+                     <children>
+                        <Label fx:id="difficultyLabel" text="Label">
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="capoPositionLabel" text="Label">
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="beatsPerMinuteLabel" text="Label">
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="riffNumberLabel" text="Label">
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Button fx:id="sceneSwitcherButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="125.0" maxWidth="200.0" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" onAction="#switchToSceneTwo" prefHeight="125.0" prefWidth="200.0" text="Add to Library " textAlignment="CENTER" translateX="20.0" translateY="-570.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </FlowPane>
+      <HBox prefHeight="400.0" prefWidth="800.0" translateX="400.0" translateY="400.0">
+         <children>
+            <ImageView fx:id="tabImageView" fitHeight="350.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+      <VBox maxHeight="400.0" maxWidth="400.0" minHeight="400.0" prefHeight="400.0" prefWidth="400.0" translateX="400.0">
+         <children>
+            <VBox maxHeight="400.0" maxWidth="200.0" minHeight="400.0" minWidth="200.0" prefHeight="400.0" prefWidth="200.0">
+               <children>
+                  <Label text="Title:" translateX="20.0">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Author:" translateX="20.0">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Album:" translateX="20.0">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Release Year:" translateX="20.0">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Genre:" translateX="20.0">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Song Key:" translateX="20.0">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox maxHeight="400.0" maxWidth="200.0" minHeight="400.0" prefHeight="400.0" prefWidth="200.0" translateX="200.0" translateY="-400.0">
+               <children>
+                  <Label fx:id="titleLabel" text="Label">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="authorLabel" text="Label">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="albumLabel" text="Label">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="releaseYearLabel" text="Label">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="genreLabel" text="Label">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="songKeyLabel" text="Label">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Label text="Songs:" translateX="151.0" translateY="20.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
