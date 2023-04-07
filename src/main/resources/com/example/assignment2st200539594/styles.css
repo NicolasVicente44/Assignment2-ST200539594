@@ -43,3 +43,6 @@
 
 
 
+#errorLabel {
+    -fx-text-fill: red;
+}

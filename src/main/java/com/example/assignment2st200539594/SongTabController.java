@@ -1,5 +1,7 @@
 package com.example.assignment2st200539594;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -170,35 +172,51 @@ public class SongTabController implements Initializable {
     @FXML
     private TextField riffImagePath;
 
+    @FXML
+    private Label errorLabel;
 
 
-
+    /**
+     * this method creates a new riff and song object and adds it to the listview storing the values forr the labels and the image. it is called when the
+     * button on the second view titled "Add to library" is pressed thus allowing for the objects to be added with a button lcick
+     */
 
     @FXML
     private void createNewRiff() {
-        String title = titleInput.getText();
-        String author = authorInput.getText();
-        String album = albumInput.getText();
-        String genre = genreInput.getText();
-        int releaseYear = Integer.parseInt(releaseYearInput.getText());
-        int bpm = Integer.parseInt(bpmInput.getText());
-        int capoPosition = 0; // default value
+        //try to set the values from the input fields, if they are not valid, throw an errrror and display the error in the error label
 
-        if (!capoPositionInput.getText().isEmpty()) {
-            capoPosition = Integer.parseInt(capoPositionInput.getText());
+        try {
+            String title = titleInput.getText();
+            String author = authorInput.getText();
+            String album = albumInput.getText();
+            String genre = genreInput.getText();
+            int releaseYear = Integer.parseInt(releaseYearInput.getText());
+            int bpm = Integer.parseInt(bpmInput.getText());
+            int capoPosition = 0; // default value
+
+            if (!capoPositionInput.getText().isEmpty()) {
+                capoPosition = Integer.parseInt(capoPositionInput.getText());
+            }
+
+            String songKey = songKeyInput.getText();
+            int riffNumber = Integer.parseInt(riffNumberInput.getText());
+            String difficulty = difficultyInput.getText();
+            String imagePath = riffImagePath.getText();
+
+            Song song = new Song(title, author, album, releaseYear, genre, songKey);
+            Riff riff = new Riff(song, imagePath, difficulty, String.valueOf(capoPosition), bpm, riffNumber);
+
+            Main.getRiffList().add(riff); //to the shared listview
+
+            refreshListView();
+
+            //clear the error label if there is no error
+            errorLabel.setText("");
+
+        } catch (IllegalArgumentException e) {
+            errorLabel.setText(e.getMessage());
         }
 
-        String songKey = songKeyInput.getText();
-        int riffNumber = Integer.parseInt(riffNumberInput.getText());
-        String difficulty = difficultyInput.getText();
-        String imagePath = riffImagePath.getText();
-
-        Song song = new Song(title, author, album, releaseYear, genre, songKey);
-        Riff riff = new Riff(song, imagePath, difficulty, String.valueOf(capoPosition), bpm, riffNumber);
-
-        Main.getRiffList().add(riff); //to the shared listview
-
-        refreshListView();
     }
 
 
@@ -247,12 +265,14 @@ public class SongTabController implements Initializable {
         releaseYearLabel.setText(String.valueOf(currentRiff.getReleaseYear()));
         songKeyLabel.setText(currentRiff.getSongKey());
 
-        //image
-        Image img = new Image(getClass().getResourceAsStream(currentRiff.getRiffImagePath()));
+        //image updating
+        Image img = null;
+        try {
+            img = new Image(getClass().getResourceAsStream(currentRiff.getRiffImagePath()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         tabImageView.setImage(img);
-
-
-
 
     }
 
@@ -318,7 +338,7 @@ public class SongTabController implements Initializable {
                     protected void updateItem(Riff riff, boolean empty) {
                         super.updateItem(riff, empty);
                         if (riff != null) {
-                            setText(riff.getTitle());
+                            setText(riff.getTitle() + " Riff " + riff.getRiffNumber());
                         } else {
                             setText(null);
                         }

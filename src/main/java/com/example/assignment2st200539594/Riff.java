@@ -55,7 +55,7 @@ public class Riff extends Song {
 
         //check if the string matches the format songNameRiff#
        if (!riffImagePath.endsWith(".png") || !riffImagePath.contains("Riff") || !riffImagePath.contains(String.valueOf(riffNumber))) {
-           throw new IllegalArgumentException("Image path must be in the format: songTitleRiff#, and the riff# must match the given riff#.");
+           throw new IllegalArgumentException("Image path must be in the format: songTitleRiff#.png, and the riff# must match the given riff#.");
        }
 
         this.riffImagePath = riffImagePath;
