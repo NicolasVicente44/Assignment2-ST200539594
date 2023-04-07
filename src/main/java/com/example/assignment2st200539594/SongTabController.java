@@ -311,17 +311,6 @@ public class SongTabController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        //first song
-        Song songOne = new Song("Crazy Train", "Ozzy Osbourne", "Blizzard of Oz", 1978, "Metal", "F#");
-        Riff riffOne = new Riff(songOne, "crazyTrainRiff1.png", "Medium", "0", 138, 1);
-
-        // Second song
-        Song songTwo = new Song("Stairway to Heaven", "Led Zeppelin", "Led Zeppelin IV", 1971, "Rock", "A");
-        Riff riffTwo = new Riff(songTwo, "stairwayToHeavenRiff1.png", "Easy", "0", 63, 1);
-
-        riffList = FXCollections.observableArrayList();
-        riffList.add(riffOne);
-        riffList.add(riffTwo);
 
 
 
