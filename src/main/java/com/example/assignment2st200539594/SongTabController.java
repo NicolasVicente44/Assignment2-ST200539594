@@ -178,46 +178,71 @@ public class SongTabController implements Initializable {
 
     /**
      * this method creates a new riff and song object and adds it to the listview storing the values forr the labels and the image. it is called when the
-     * button on the second view titled "Add to library" is pressed thus allowing for the objects to be added with a button lcick
+     * button on the second view titled "Add to library" is pressed thus allowing for the objects to be added with a button lcick. the method also
+     * sets the error label in the seoncd view to be the corresponding error if there is one
      */
 
     @FXML
     private void createNewRiff() {
-        //try to set the values from the input fields, if they are not valid, throw an errrror and display the error in the error label
-
         try {
             String title = titleInput.getText();
             String author = authorInput.getText();
             String album = albumInput.getText();
             String genre = genreInput.getText();
-            int releaseYear = Integer.parseInt(releaseYearInput.getText());
-            int bpm = Integer.parseInt(bpmInput.getText());
-            int capoPosition = 0; // default value
 
+            int releaseYear;
+            try {
+                releaseYear = Integer.parseInt(releaseYearInput.getText());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Release year must be a number.");
+            }
+
+            int bpm;
+            try {
+                bpm = Integer.parseInt(bpmInput.getText());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("BPM must be a number.");
+            }
+
+            int capoPosition = 0;
             if (!capoPositionInput.getText().isEmpty()) {
-                capoPosition = Integer.parseInt(capoPositionInput.getText());
+                try {
+                    capoPosition = Integer.parseInt(capoPositionInput.getText());
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("Capo position must be a number.");
+                }
             }
 
             String songKey = songKeyInput.getText();
-            int riffNumber = Integer.parseInt(riffNumberInput.getText());
+
+            int riffNumber;
+            try {
+                riffNumber = Integer.parseInt(riffNumberInput.getText());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Riff number must be a number.");
+            }
+
             String difficulty = difficultyInput.getText();
             String imagePath = riffImagePath.getText();
 
             Song song = new Song(title, author, album, releaseYear, genre, songKey);
             Riff riff = new Riff(song, imagePath, difficulty, String.valueOf(capoPosition), bpm, riffNumber);
 
-            Main.getRiffList().add(riff); //to the shared listview
+            Main.getRiffList().add(riff);
 
             refreshListView();
 
             //clear the error label if there is no error
             errorLabel.setText("");
-
         } catch (IllegalArgumentException e) {
             errorLabel.setText(e.getMessage());
         }
-
     }
+
+
+
+
+
 
 
 

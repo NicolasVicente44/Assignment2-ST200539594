@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -16,14 +17,19 @@
 
       <FlowPane prefHeight="800.0" prefWidth="1200.0">
          <children>
-            <VBox prefHeight="800.0" prefWidth="400.0">
+            <VBox alignment="CENTER" prefHeight="800.0" prefWidth="400.0">
                <children>
-                  <ListView fx:id="songsListView" fixedCellSize="-5.0" maxHeight="650.0" maxWidth="350.0" minWidth="0.0" prefHeight="650.0" prefWidth="350.0" translateX="25.0" translateY="100.0" />
+                  <Label text="Songs:" translateX="2.0" translateY="-29.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="songsListView" maxHeight="700.0" maxWidth="350.0" minHeight="650.0" minWidth="0.0" prefHeight="650.0" prefWidth="350.0" />
                </children>
             </VBox>
             <VBox maxHeight="400.0" maxWidth="400.0" minHeight="400.0" prefHeight="400.0" prefWidth="400.0" translateX="400.0" translateY="-200.0">
                <children>
-                  <VBox maxHeight="400.0" maxWidth="200.0" minHeight="400.0" minWidth="200.0" prefHeight="400.0" prefWidth="200.0">
+                  <VBox fx:id="riffInfo" maxHeight="400.0" maxWidth="200.0" minHeight="400.0" minWidth="200.0" prefHeight="400.0" prefWidth="200.0">
                      <children>
                         <Label text="Difficulty:" translateX="20.0">
                            <padding>
@@ -109,12 +115,18 @@
       </FlowPane>
       <HBox prefHeight="400.0" prefWidth="800.0" translateX="400.0" translateY="400.0">
          <children>
-            <ImageView fx:id="tabImageView" fitHeight="350.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" translateY="40.0" />
+            <ImageView fx:id="tabImageView" fitHeight="350.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" translateY="40.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></ImageView>
          </children>
+         <padding>
+            <Insets top="50.0" />
+         </padding>
       </HBox>
       <VBox maxHeight="400.0" maxWidth="400.0" minHeight="400.0" prefHeight="400.0" prefWidth="400.0" translateX="400.0">
          <children>
-            <VBox maxHeight="400.0" maxWidth="200.0" minHeight="400.0" minWidth="200.0" prefHeight="400.0" prefWidth="200.0">
+            <VBox fx:id="songInfo" maxHeight="400.0" maxWidth="200.0" minHeight="400.0" minWidth="200.0" prefHeight="400.0" prefWidth="200.0">
                <children>
                   <Label text="Title:" translateX="20.0">
                      <padding>
@@ -223,11 +235,6 @@
             <Insets top="80.0" />
          </padding>
       </VBox>
-      <Label text="Songs:" translateX="151.0" translateY="20.0">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
       <Label layoutX="10.0" layoutY="10.0" text="Song Info:" translateX="460.0" translateY="10.0" translateZ="1.0">
          <font>
             <Font size="36.0" />
@@ -238,5 +245,10 @@
             <Font size="36.0" />
          </font>
       </Label>
+      <ImageView fitHeight="69.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true" translateX="30.0" translateY="10.0">
+         <image>
+            <Image url="@guitarlogo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

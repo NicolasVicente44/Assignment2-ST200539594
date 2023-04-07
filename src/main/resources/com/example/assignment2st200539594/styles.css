@@ -9,13 +9,14 @@
 }
 
 .button:hover {
-    -fx-background-color: #b3cde0;
+    -fx-background-color: #90ee90;
 }
 
 
 .list-view {
     -fx-background-color: #ffffff;
-    -fx-border-radius: 80pt;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
 }
 
 .list-cell {
@@ -29,6 +30,7 @@
 
 .list-view .list-cell {
     -fx-padding: 10px;
+
 }
 
 
@@ -46,3 +48,4 @@
 #errorLabel {
     -fx-text-fill: red;
 }
+
