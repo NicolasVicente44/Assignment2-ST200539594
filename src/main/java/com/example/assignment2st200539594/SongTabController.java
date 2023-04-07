@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.binding.ObjectExpression;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,9 +58,17 @@ public class SongTabController implements Initializable {
 
 
     //song list
-    private List<Riff> riffList;
+    private ObservableList<Riff> riffList;
     private int currentRiffIndex = 0;
 
+
+
+    // this method reloads the list view by emptying it then setting it with the riffLisT
+    //it also gets the sharded list view between the two views from the main class
+    public void refreshListView() {
+        songsListView.setItems(null);
+        songsListView.setItems(Main.getRiffList());
+    }
 
 
 
@@ -106,6 +117,103 @@ public class SongTabController implements Initializable {
 
     @FXML
     private Label titleLabel;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //view 2's fxml variables and methods
+
+    @FXML
+    private TextField albumInput;
+
+    @FXML
+    private TextField authorInput;
+
+    @FXML
+    private TextField bpmInput;
+
+    @FXML
+    private TextField capoPositionInput;
+
+    @FXML
+    private Button createNewButton;
+
+    @FXML
+    private TextField difficultyInput;
+
+    @FXML
+    private TextField genreInput;
+
+    @FXML
+    private TextField releaseYearInput;
+
+    @FXML
+    private TextField riffNumberInput;
+
+    @FXML
+    private TextField songKeyInput;
+    @FXML
+    private TextField titleInput;
+
+    @FXML
+    private TextField riffImagePath;
+
+
+
+
+
+    @FXML
+    private void createNewRiff() {
+        String title = titleInput.getText();
+        String author = authorInput.getText();
+        String album = albumInput.getText();
+        String genre = genreInput.getText();
+        int releaseYear = Integer.parseInt(releaseYearInput.getText());
+        int bpm = Integer.parseInt(bpmInput.getText());
+        int capoPosition = 0; // default value
+
+        if (!capoPositionInput.getText().isEmpty()) {
+            capoPosition = Integer.parseInt(capoPositionInput.getText());
+        }
+
+        String songKey = songKeyInput.getText();
+        int riffNumber = Integer.parseInt(riffNumberInput.getText());
+        String difficulty = difficultyInput.getText();
+        String imagePath = riffImagePath.getText();
+
+        Song song = new Song(title, author, album, releaseYear, genre, songKey);
+        Riff riff = new Riff(song, imagePath, difficulty, String.valueOf(capoPosition), bpm, riffNumber);
+
+        Main.getRiffList().add(riff); //to the shared listview
+
+        refreshListView();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -166,19 +274,58 @@ public class SongTabController implements Initializable {
         Song songTwo = new Song("Stairway to Heaven", "Led Zeppelin", "Led Zeppelin IV", 1971, "Rock", "A");
         Riff riffTwo = new Riff(songTwo, "stairwayToHeavenRiff1.png", "Easy", "0", 63, 1);
 
-
-
-        riffList = new ArrayList<>();
+        riffList = FXCollections.observableArrayList();
         riffList.add(riffOne);
         riffList.add(riffTwo);
 
 
 
+
+
         //adds the list of the riffs to the list view
-        songsListView.getItems().addAll(riffList);
+        songsListView.getItems().addAll(Main.getRiffList());
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+        /**
+         * this method changes the riff displayed if the user clicks on the song in the list view and also makes the names disapleyd in the listview the titles of the riffs songs
+         */
+        songsListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Riff>() {
+            @Override
+            public void changed(ObservableValue<? extends Riff> observable, Riff oldValue, Riff newValue) {
+                if (newValue != null) {
+                    switchSong(newValue);
+                }
+            }
+        });
+
+        songsListView.setCellFactory(new Callback<ListView<Riff>, ListCell<Riff>>() {
+            @Override
+            public ListCell<Riff> call(ListView<Riff> listView) {
+                return new ListCell<Riff>() {
+                    @Override
+                    protected void updateItem(Riff riff, boolean empty) {
+                        super.updateItem(riff, empty);
+                        if (riff != null) {
+                            setText(riff.getTitle());
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
 
 
 
