@@ -35,6 +35,9 @@ public class SongTabController implements Initializable {
     private Scene scene;
     private Parent root;
 
+    //i use this variable to check if theres a newly created item added so that i can set the information relevant to it upon adding it to the library
+    private static boolean lastAdded = false;
+
 
     /**
      * these two methods switch between scenes
@@ -228,9 +231,17 @@ public class SongTabController implements Initializable {
             Song song = new Song(title, author, album, releaseYear, genre, songKey);
             Riff riff = new Riff(song, imagePath, difficulty, String.valueOf(capoPosition), bpm, riffNumber);
 
+            //add the new riff to the list of riffs
             Main.getRiffList().add(riff);
 
+            //set the lastAdded to true indicating a new item was created
+            lastAdded = true;
+
+
+            //refresh the list view
             refreshListView();
+
+
 
             //clear the error label if there is no error
             errorLabel.setText("");
@@ -344,6 +355,7 @@ public class SongTabController implements Initializable {
             }
         });
 
+        //make set the titles in the list view to the song title
         songsListView.setCellFactory(new Callback<ListView<Riff>, ListCell<Riff>>() {
             @Override
             public ListCell<Riff> call(ListView<Riff> listView) {
@@ -361,6 +373,23 @@ public class SongTabController implements Initializable {
             }
         });
 
+
+
+
+
+
+
+        /*
+        loads the first item on the list when the applciation initially runs, if there is a newly created item, load it upon returning to the library view
+         */
+        if (!songsListView.getItems().isEmpty()) {
+            if (lastAdded) { //if newly created item, set the info to be that newly created item
+                songsListView.getSelectionModel().select(songsListView.getItems().size() - 1);
+                lastAdded = false;
+            } else { //otherwise set it to the first item in the list
+                songsListView.getSelectionModel().select(0);
+            }
+        }
 
 
     }
